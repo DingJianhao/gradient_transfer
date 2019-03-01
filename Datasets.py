@@ -2,6 +2,7 @@ import numpy as np
 from PIL import Image,ImageOps
 from torch.utils.data import Dataset
 from torch.utils.data.sampler import BatchSampler
+import torch
 
 class TripletMNIST(Dataset):
     """
@@ -10,6 +11,8 @@ class TripletMNIST(Dataset):
     """
 
     def __init__(self, mnist_dataset):
+        torch.manual_seed(21)
+        torch.cuda.manual_seed_all(21)
         self.mnist_dataset = mnist_dataset
         self.train = self.mnist_dataset.train
         self.transform = self.mnist_dataset.transform
@@ -78,6 +81,8 @@ class TripletSVHN(Dataset):
     """
 
     def __init__(self, dataset,train=True):
+        torch.manual_seed(21)
+        torch.cuda.manual_seed_all(21)
         self.dataset = dataset
         self.train = train
         self.transform = self.dataset.transform
@@ -142,6 +147,8 @@ class TripletMNIST_MINI(Dataset):
     pro: probability of inverted samples
     '''
     def __init__(self, mnist_dataset, sample_per_label, pro):
+        torch.manual_seed(21)
+        torch.cuda.manual_seed_all(21)
         self.sample_per_label = sample_per_label
         self.pro = pro
         self.mnist_dataset = mnist_dataset
