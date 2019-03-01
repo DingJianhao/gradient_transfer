@@ -113,7 +113,7 @@ n_epochs_G = 1000
 print(len(train_loader_S))
 print(len(train_loader_B))
 R = len(train_loader_B)//len(train_loader_S) + 1 if len(train_loader_B)%len(train_loader_S) else len(train_loader_B)//len(train_loader_S)
-print(R)
+print(R)#
 
 losses_B = []
 losses_S = []
