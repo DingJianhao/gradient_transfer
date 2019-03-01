@@ -1,5 +1,9 @@
 import torch.nn as nn
 import torch.nn.functional as F
+import torch
+
+torch.manual_seed(21)
+torch.cuda.manual_seed_all(21)
 
 class EmbeddingNet(nn.Module):
     def __init__(self):
@@ -31,7 +35,7 @@ class MLP_Embedding(nn.Module):
         super(MLP_Embedding, self).__init__()
         self.fc1 = nn.Sequential(nn.Linear(28*28, 256),
                                 # nn.PReLU(),
-                                nn.Linear(256, 256)
+                                nn.Linear(256, 256),
                                 # nn.PReLU(),
                                 )
         self.fc2 = nn.Sequential(nn.Linear(256,16))
@@ -64,8 +68,8 @@ class Generator(nn.Module):
         self.dim = dim
         self.size = self.dim[0]*self.dim[1]
         self.fc = nn.Sequential(
-            nn.Linear(self.size , 100),
-            nn.Linear(100, self.size)
+            nn.Linear(self.size , 256),
+            nn.Linear(256, self.size)
         )
 
     def forward(self,x):
